@@ -39,3 +39,7 @@ This below script will create manhattan plot based on the SNP frequency over the
 
         Rscript manhatton_roh.R "/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/Runs_of_Homozygosity/1_ROH_analysis_plink/Common_variant" "tiwi_data_out.hom.summary" "tiwi_data_out.hom.indiv" "tiwi_data"
 
+
+# Karyogram plot for genome-wide ROH 
+
+
