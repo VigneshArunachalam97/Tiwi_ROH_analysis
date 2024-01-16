@@ -15,6 +15,7 @@ Step 1: Run a ROH using the "homozyg" function in the plink v1.9. The following 
               --homozyg-window-snp 50 \
               --keep-allele-order \
               --out tiwi_data_out
+
 Please refer the plink tutorial or website to understand the description for each parameter used (refer: https://www.cog-genomics.org/plink/1.9/ibd)
 
 Plink produces three different output, they are 
@@ -31,3 +32,11 @@ Step 4: Calculate the allele frequency and filter maf < 0.01 (1%) for further as
 Stpe 5: Use either GCTA or plink to run the association analysis by adding covariates including age, and gender. (population structure PC's 1 and 2, if available)
 
 Please refer the script folder for corresponding plot and analysis.
+
+# Visualization plot - Manhattan plot for ROH based on the SNP status ###
+This below script will create manhattan plot based on the SNP frequency over the population. This is automated script and produce a png, pdf, RDS for image object as a ouput in the folder given
+Rscript manhatton_roh.R "/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/Runs_of_Homozygosity/1_ROH_analysis_plink/Common_variant" \
+                        "tiwi_data_out.hom.summary" \
+                        "tiwi_data_out.hom.indiv" \
+                        "tiwi_data"
+
