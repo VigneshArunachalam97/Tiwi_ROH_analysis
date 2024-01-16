@@ -25,8 +25,9 @@ for(i in 1:length(files)){
 	plot[[i]] <- pl
 }
 
-final_plot <- plot_grid(plotlist = plot, ncol = 2, nrow = 5, rel_widths = 1, rel_heights = 1)
+final_plot <- plot_grid(plotlist = plot, ncol = 2, nrow = (length(files)/5), rel_widths = 1, rel_heights = 1)
 
-png("ROH_genomeWide_all_Population.png", w = 3600, h = 1000*5, res = 300, type = "cairo")
+png("ROH_genomeWide_all_Population.png", w = 3600, h = 1000*(length(files)/5), res = 300, type = "cairo")
 final_plot
 dev.off()
+print("plot saved in the given folder")
