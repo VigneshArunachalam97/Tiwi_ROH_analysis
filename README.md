@@ -61,10 +61,11 @@ The **GCTA script** for all the available phenotypes are given as follows
             cd /home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/Runs_of_Homozygosity/1_ROH_analysis_plink/Common_variant/1_Association_files/2_plink_files/
 **2. Run GWAS using GCTA** 
 
+           cd /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/
            COUNTER=1
             line="weight height waist SBP_2 DBP_2 specific_gravity urine_creatinine_1 urine_albumin_mg_dL creatinine_1 albumin_1 hba1c_1 uric_acid_1 urine_osmolality_1 eGFR_predicted ACR BMI"
             for word in $line; do echo $COUNTER; /home/n11142006/vig_Tools/gcta_1.93.3beta2/gcta64 --bfile Tiwi_roh_001maf \
-                  --grm /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/Tiwi_data_relationshp_005maf \
+                  --grm Tiwi_data_relationshp_005maf \
                   --pheno /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Phenotype_data/Tiwi_data_n455_std.tsv \
                   --covar /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Phenotype_data/Tiwi_data_n455_sex_info.tsv \
                   --qcovar /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/Tiwi_data_qcovar_2pc_info.txt \
@@ -81,4 +82,6 @@ The **GCTA script** for all the available phenotypes are given as follows
                 done
 **4. Run annotation for the output**
 
-      Rscript /home/n11142006/TIwi_data/Script/Functions/Merge_annotation_for_plink.R "../../3_Association_results/../ ".mlma"          
+      Rscript /home/n11142006/TIwi_data/Script/Functions/Merge_annotation_for_plink.R "../../3_Association_results/../ ".mlma"     
+
+Finally, Now we have completed the regional-wide ROH association analysis for the given population 
