@@ -3,7 +3,7 @@ print(args)
 ### args1 - folder contains the RDS object for other population
 #!/bin/bash
 #### import required packages ####
-library(ggplot2)
+library(ggplot2) 
 library(cowplot)
 library(dplyr)
 library(stringr)
