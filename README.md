@@ -81,4 +81,4 @@ The **GCTA script** for all the available phenotypes are given as follows
                 done
 **4. Run annotation for the output**
 
-                
+      Rscript /home/n11142006/TIwi_data/Script/Functions/Merge_annotation_for_plink.R "../../3_Association_results/../ ".mlma"          
