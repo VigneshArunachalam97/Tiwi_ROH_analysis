@@ -83,3 +83,12 @@ rm(sum)
 roh_indivi <- read.table("../ROH_common_run0.hom.indiv", header = T)
 new <- new[,c("SNP", roh_indivi$IID)]
 write.table(new, "Tiwi_data_plink_roh_reginal.tsv", quote = F, row.names = F)  ##### save the output file ROH format #####
+#### make garlic file and convert that into plink file ##
+csv_file <- "/mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/3_IBD/MMAP_files/Tiwi_data_mmap_first_sex_columns.csv"
+col <- read.csv(csv_file)
+print(head(col))
+rownames(col) <- col$SNPNAME
+print(table(col$SNPNAME == rownames(new))) ### check the snps are in the same order
+##### merge the two dataset ####
+combined_data <- cbind(col, new)
+write.csv(combined_data, row.names = F, quote = F, "/mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/Runs_of_Homozygosity/1_ROH_analysis_plink/Common_variant/1_Association_files/Tiwi_data_regional_roh_plink.csv")
