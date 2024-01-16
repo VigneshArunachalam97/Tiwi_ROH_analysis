@@ -41,5 +41,44 @@ This below script will create manhattan plot based on the SNP frequency over the
 
 
 # Karyogram plot for genome-wide ROH 
+The Karyogram plot was adapted from the **github page - https://github.com/tkn132/roh_karyogram**
 
+# Association between regional-wide ROH and phenotypes
+We have run association analysis using two different software including plink and GCTA. Before running the association analysis, we have removed the SNPs status frequency less than 0.01 or 1% from the further association analysis. The following parameters are used to the glm using **plink**.
+                
+        plink --pfile /../1_ROH_analysis_plink/Common_variant/1_Association_files/2_plink_files/Tiwi_roh_plink2Out
+              --covar /../3_IBD/MMAP_files/Tiwi_cov_assoc.tsv
+              --covar-name age sex
+              --covar-variance-standardize  
+              --extract /../1_ROH_analysis_plink/Common_variant/1_Association_files/2_plink_files/maf_filtered_snps.snplist
+              --glm
+              --out /../Common_variant/1_Association_files/3_Association_results/1_withSTD/2_001MAF/Assoc_ROH_001        
+              --pheno /../Tiwi_phenotype_assoc_std.tsv
 
+The **GCTA script** for all the available phenotypes are given as follows 
+**1. Set working directory**
+
+            cd /home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/Runs_of_Homozygosity/1_ROH_analysis_plink/Common_variant/1_Association_files/2_plink_files/
+**2. Run GWAS using GCTA** 
+
+           COUNTER=1
+            line="weight height waist SBP_2 DBP_2 specific_gravity urine_creatinine_1 urine_albumin_mg_dL creatinine_1 albumin_1 hba1c_1 uric_acid_1 urine_osmolality_1 eGFR_predicted ACR BMI"
+            for word in $line; do echo $COUNTER; /home/n11142006/vig_Tools/gcta_1.93.3beta2/gcta64 --bfile Tiwi_roh_001maf \
+                  --grm /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/Tiwi_data_relationshp_005maf \
+                  --pheno /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Phenotype_data/Tiwi_data_n455_std.tsv \
+                  --covar /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Phenotype_data/Tiwi_data_n455_sex_info.tsv \
+                  --qcovar /mnt/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/Tiwi_data_qcovar_2pc_info.txt \
+                  --mlma \
+                  --out "/home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/Runs_of_Homozygosity/1_ROH_analysis_plink/Common_variant/1_Association_files/3_Association_results/2_withSTD/2_001MAF_GCTA/Tiwi_data_roh_$word" \
+                  --mpheno $COUNTER;COUNTER=$((COUNTER+1));done
+**3. Create a manhattan plot for output**
+
+                 for i in *.mlma; \
+                        do echo $i; \
+                        var="$(echo $i | sed 's/.mlma//g' | sed 's/Tiwi_data_roh_//g')"; \
+                        echo ${var}; \
+                        Rscript /home/n11142006/TIwi_data/Script/Functions/Manhattan_qq_combined.R $i Assoc_ROH_${var} "${var} - Regional ROH" "GCTA"; \
+                done
+**4. Run annotation for the output**
+
+                
