@@ -84,4 +84,4 @@ The **GCTA script** for all the available phenotypes are given as follows
 
       Rscript /home/n11142006/TIwi_data/Script/Functions/Merge_annotation_for_plink.R "../../3_Association_results/../ ".mlma"     
 
-Finally, Now we have completed the regional-wide ROH association analysis for the given population 
+Finally, Now we have completed the regional-wide ROH association analysis for the given population.
