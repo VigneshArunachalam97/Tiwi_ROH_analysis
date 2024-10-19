@@ -82,6 +82,15 @@ The **GCTA script** for all the available phenotypes are given as follows
                 done
 **4. Run annotation for the output**
 
-      Rscript /home/n11142006/TIwi_data/Script/Functions/Merge_annotation_for_plink.R "../../3_Association_results/../ ".mlma"     
+      Rscript /home/n11142006/TIwi_data/Script/Functions/Merge_annotation_for_plink.R "../../3_Association_results/../ ".mlma"
+
+**5. Run Recessive model for the ACR levels**
+                
+      plink2 --bfile /home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/Tiwi_data_filtered \
+             --covar /home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/3_IBD/MMAP_files/Tiwi_cov_assoc_pcs.tsv \
+             --covar-name age sex PC_1 PC_2 \
+             --pheno /home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/3_IBD/MMAP_files/Tiwi_phenotype_assoc_std.tsv \
+             --glm recessive hide-covar \
+             --out /home/n11142006/TIwi_data/Genotypic_data/Final_vcf_file/6_Tiwi_updated/Genotype_data/Merged_analysis/1_MAF0.05/5_Recessive_model/02_GRM_PCs/Tiwi_data_recessive
 
 Finally, Now we have completed the regional-wide ROH association analysis for the given population.
